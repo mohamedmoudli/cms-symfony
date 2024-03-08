@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FormEtatVariable{% endblock %}
+
+{% block content %}
+    <h1>Creer un Etat Variable</h1>
+
+    {{ include('form_etat_variable/_form.html.twig') }}
+
+    <a href="{{ path('app_form_etat_variable_index') }}">back to list</a>
+{% endblock %}

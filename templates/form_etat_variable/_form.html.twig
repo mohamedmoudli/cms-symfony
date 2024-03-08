@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-body">
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.formEtat, 'form Etat', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.formEtat, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.formEtat) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.nomVariable, 'nom Variable', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.nomVariable, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.nomVariable) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.label, 'label', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.label, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.label) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.typeInput, 'type Input', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.typeInput, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.typeInput) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.valeur, 'valeur', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.valeur, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.valeur) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        Save
+                    </button>
+                    <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

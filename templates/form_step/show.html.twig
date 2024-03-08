@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormStep{% endblock %}
+
+{% block body %}
+    <h1>FormStep</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_step.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ form_step.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ form_step.description }}</td>
+            </tr>
+            <tr>
+                <th>Ordre</th>
+                <td>{{ form_step.ordre }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ form_step.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Save</th>
+                <td>{{ form_step.save ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ form_step.createdAt ? form_step.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ form_step.updatedAt ? form_step.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_form_step_index') }}">back to list</a>
+
+    <a href="{{ path('app_form_step_edit', {'id': form_step.id}) }}">edit</a>
+
+    {{ include('form_step/_delete_form.html.twig') }}
+{% endblock %}

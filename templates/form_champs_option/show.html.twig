@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormChampsOption{% endblock %}
+
+{% block body %}
+    <h1>FormChampsOption</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_champs_option.id }}</td>
+            </tr>
+            <tr>
+                <th>Option</th>
+                <td>{{ form_champs_option.option }}</td>
+            </tr>
+            <tr>
+                <th>Valeur</th>
+                <td>{{ form_champs_option.valeur }}</td>
+            </tr>
+            <tr>
+                <th>Ordre</th>
+                <td>{{ form_champs_option.ordre }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ form_champs_option.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ form_champs_option.createdAt ? form_champs_option.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ form_champs_option.updatedAt ? form_champs_option.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_form_champs_option_index') }}">back to list</a>
+
+    <a href="{{ path('app_form_champs_option_edit', {'id': form_champs_option.id}) }}">edit</a>
+
+    {{ include('form_champs_option/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormChamps{% endblock %}
+
+{% block body %}
+    <h1>FormChamps</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_champ.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ form_champ.label }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>{{ form_champ.question }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ form_champ.description }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ form_champ.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Config</th>
+                <td>{{ form_champ.config ? form_champ.config|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ form_champ.createdAt ? form_champ.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ form_champ.updatedAt ? form_champ.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_form_champs_index') }}">back to list</a>
+
+    <a href="{{ path('app_form_champs_edit', {'id': form_champ.id}) }}">edit</a>
+
+    {{ include('form_champs/_delete_form.html.twig') }}
+{% endblock %}

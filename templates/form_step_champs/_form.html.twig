@@ -1,0 +1,60 @@
+<div class="row">
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-body">
+                <div class="row p-t-20">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.formStep, 'form Step', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(form.formStep, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                            }}
+                            {{ form_errors(form.formStep) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.formChamps, 'form Champs', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(form.formChamps, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                            }}
+                            {{ form_errors(form.formChamps) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.ordre, 'ordre', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(form.ordre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                            }}
+                            {{ form_errors(form.ordre) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.actif) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            {{ form_row(form.obligatoire) }}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check"></i>
+                    Save
+                </button>
+                <a href="" type="button" class="btn btn-inverse">Cancel</a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,113 @@
+
+
+
+
+
+
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New Image{% endblock %}
+
+{% block content %}
+    <h1>Creer un formulaire</h1>
+
+    {{ include('form/_form.html.twig') }}
+
+
+    <a href="{{ path('app_form_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
+
+    <script src="{{ asset('assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/html5-editor/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('assets/plugins/html5-editor/bootstrap-wysihtml5.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.textarea_editor').wysihtml5();
+            $('.textarea_editor2').wysihtml5();
+
+
+        });
+    </script>
+    <script type="text/javascript" src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script>
+    <link rel="stylesheet"
+          href=
+          "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript"
+            src=
+            "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js">
+    </script>
+    <script>
+        $(function () {
+            $("#demo-foo-accordion").sortable({
+                items: 'tr:not(tr:first-child)',
+                dropOnEmpty: false,
+                start: function (G, ui) {
+                    ui.item.addClass("select");
+                },
+                stop: function (G, ui) {
+                    ui.item.removeClass("select");
+                    $(this).find("tr").each(function (GFG) {
+                        if (GFG > 0) {
+                            $(this).find("td").eq(2).html(GFG);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

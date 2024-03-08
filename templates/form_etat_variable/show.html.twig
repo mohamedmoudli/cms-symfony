@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormEtatVariable{% endblock %}
+
+{% block body %}
+    <h1>FormEtatVariable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_etat_variable.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ form_etat_variable.label }}</td>
+            </tr>
+            <tr>
+                <th>NomVariable</th>
+                <td>{{ form_etat_variable.nomVariable }}</td>
+            </tr>
+            <tr>
+                <th>TypeInput</th>
+                <td>{{ form_etat_variable.typeInput }}</td>
+            </tr>
+            <tr>
+                <th>Valeur</th>
+                <td>{{ form_etat_variable.valeur }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ form_etat_variable.createdAt ? form_etat_variable.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ form_etat_variable.updatedAt ? form_etat_variable.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_form_etat_variable_index') }}">back to list</a>
+
+    <a href="{{ path('app_form_etat_variable_edit', {'id': form_etat_variable.id}) }}">edit</a>
+
+    {{ include('form_etat_variable/_delete_form.html.twig') }}
+{% endblock %}

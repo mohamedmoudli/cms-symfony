@@ -1,0 +1,267 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-body">
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.projet, 'Projet', {'label_attr': {'class': 'control-label'}}) }}}
+                                {{ form_widget(form.projet, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.projet) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.titre) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.label, 'label', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.label, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.label) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.biblio, 'biblio', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.biblio, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.biblio) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ form_label(form.descriptionDebut, 'Description debut ', {'label_attr': {'class':
+                                    'control-label'}}) }}
+                                {{ form_widget(form.descriptionDebut, {'attr': {'class': 'textarea_editor form-control', 'placeholder':
+                                    'Description Debut'}}) }}
+                                {{ form_errors(form.descriptionDebut) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ form_label(form.descriptionFin, 'Description fin', {'label_attr': {'class':
+                                    'control-label'}}) }}
+                                {{ form_widget(form.descriptionFin, {'attr': {'class': 'textarea_editor1 form-control', 'placeholder':
+                                    'Description Fin'}}) }}
+                                {{ form_errors(form.descriptionFin) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        Save
+                    </button>
+                    <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion" id="accordionTable">
+    <div class="card m-b-5">
+        <div aria-labelledby="heading1">
+            <div class="card-body">
+                <a data-toggle="modal" data-target="#stepModal" href="{{ path('app_form_etat_new') }}" type="button" class="btn btn-info btn-rounded m-t-10 float-right text-white">Ajouter Form Etat</a>
+                <div class="modal fade" id="stepModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel1">Champs option</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            {{ form_start(formStep) }}
+                                                            <div class="form-body">
+                                                                <div class="row p-t-20">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            {{ form_label(formStep.titre, 'Titre', {'label_attr': {'class': 'control-label'}}) }}
+                                                                            {{ form_widget(formStep.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                                                            }}
+                                                                            {{ form_errors(formStep.titre) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            {{ form_label(formStep.ordre, 'Order', {'label_attr': {'class': 'control-label'}}) }}
+                                                                            {{ form_widget(formStep.ordre, {'attr': {'class': 'form-control custom-select'}}) }}
+                                                                            {{ form_errors(formStep.ordre) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            {{ form_row(formStep.save) }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            {{ form_label(formStep.description, 'Description ', {'label_attr': {'class':
+                                                                                'control-label'}}) }}
+                                                                            {{ form_widget(formStep.description, {'attr': {'class': 'textarea_editor2 form-control', 'placeholder':
+                                                                                'Description Debut'}}) }}
+                                                                            {{ form_errors(formStep.description) }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+
+                                                                        {{ form_row(formStep.actif) }}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-actions">
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fa fa-check"></i>
+                                                                    Save
+                                                                </button>
+                                                                <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                                                            </div>
+                                                            {{ form_end(formStep) }}
+                                                            {{ form_end(form) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                        <a href="{{ path('app_form_etat_delete', {'id': 'dddddddd'}) }}" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="myTable" class=" display table table-bordered m-b-0 toggle-arrow-tiny"
+                           data-filtering="true" data-paging="true" data-sorting="true">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>titre</th>
+                            <th>ordre</th>
+                            <th>save</th>
+                            <th>description</th>
+                            <th>actif</th>
+
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <th>titre</th>
+                            <th>ordre</th>
+                            <th>save</th>
+                            <th>description</th>
+                            <th>actif</th>
+
+                            <th>actions</th>
+                        </tr>
+                        {% for form_etat in formSteps %}
+
+                            <tr>
+                                <td class="details-control"><i class="fa fa-plus" aria-hidden="true"></i></td>
+                                <td>{{ form_etat.titre }}</td>
+                                <td>{{ form_etat.ordre }}</td>
+                                <td>{{ form_etat.save }}</td>
+                                <td>{{ form_etat.description }}</td>
+                                <td>{{ form_etat.actif }}</td>
+                                <td>
+                                    <a href="{{ path('app_form_etat_edit', {'id': form_etat.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                                    <a data-toggle="modal" data-target="#elementModal"><i class="far fa-trash-alt " style="color: red"></i></a>
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="elementModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel1">Champs option</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    Voulez vous supprimer cette Etat
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <a href="{{ path('app_form_step_delete', {'id': form_etat.id}) }}" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>sssssssssssssssssssssss</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

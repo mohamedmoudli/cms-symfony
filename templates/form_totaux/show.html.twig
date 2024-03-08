@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormTotaux{% endblock %}
+
+{% block body %}
+    <h1>FormTotaux</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_totaux.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ form_totaux.label }}</td>
+            </tr>
+            <tr>
+                <th>Unite</th>
+                <td>{{ form_totaux.unite }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ form_totaux.createdAt ? form_totaux.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ form_totaux.updatedAt ? form_totaux.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_form_totaux_index') }}">back to list</a>
+
+    <a href="{{ path('app_form_totaux_edit', {'id': form_totaux.id}) }}">edit</a>
+
+    {{ include('form_totaux/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,68 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-body">
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.form, 'Formulaire', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.form, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.form) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                }}
+                                {{ form_errors(form.titre) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.ordre, 'Order', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.ordre, {'attr': {'class': 'form-control custom-select'}}) }}
+                                {{ form_errors(form.ordre) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.save) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ form_label(form.description, 'Description ', {'label_attr': {'class':
+                                    'control-label'}}) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'textarea_editor form-control', 'placeholder':
+                                    'Description Debut'}}) }}
+                                {{ form_errors(form.description) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            {{ form_row(form.actif) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        Save
+                    </button>
+                    <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

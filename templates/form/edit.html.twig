@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Form{% endblock %}
+
+{% block content %}
+    <style>
+        .action-new{
+            padding: 0;
+            place-content: end;
+            color: var(--bs-primary) !important;
+        }
+    </style>
+    <h1>Edit Form</h1>
+
+    {{ include('form/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_form_index') }}">back to list</a>
+
+    {{ include('form/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+    <script src="{{ asset('assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/html5-editor/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('assets/plugins/html5-editor/bootstrap-wysihtml5.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+
+             $('.textarea_editor').wysihtml5();
+            $('.textarea_editor1').wysihtml5();
+            $('.textarea_editor2').wysihtml5();
+
+
+        });
+    </script>
+   <script type="text/javascript" src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script>
+    <link rel="stylesheet"
+          href=
+          "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript"
+            src=
+            "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js">
+    </script>
+    <script>
+        $(function () {
+            $("#myTable").sortable({
+                items: 'tr:not(tr:first-child)',
+                dropOnEmpty: false,
+                start: function (G, ui) {
+                    ui.item.addClass("select");
+                },
+                stop: function (G, ui) {
+                    ui.item.removeClass("select");
+                    $(this).find("tr").each(function (GFG) {
+                        if (GFG > 0) {
+                            $(this).find("td").eq(2).html(GFG);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#myTable').DataTable({
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: 0
+                }],
+                order: [[1, 'asc']]
+            });
+
+            // Add event listener for opening and closing details
+            $('#myTable tbody').on('click', 'td.details-control', function() {
+
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    $(this).html('<i class="fa fa-plus" aria-hidden="true">')
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    $(this).html('<i class="fa fa-minus" aria-hidden="true">')
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+
+            // Format details
+            function format(data) {
+                console.log('formStepChamps');
+                var formStepChamps = []
+                 this.formStepChamps = {{ formStepChamps | json_encode }}
+                   tab = ''
+                console.log(this.formStepChamps);
+                for (let i = 0; i < this.formStepChamps.length; i++) {
+                    this.tab += '<tr> <td>med </td> <td> med </td> <td>med </td> <td>yes </td> <td>06-03-2024 </td> <td>06-03-2024 </td> <td> <a href=""><i class="fas fa-pencil-alt"></i></a><a data-toggle="modal" data-target="#elementModal"><i class="far fa-trash-alt " style="color: red"></i></a> </td></tr>' ;
+                 }
+                return '<div> ' +
+                    '<table id="myTable" class=" display table table-bordered m-b-0 toggle-arrow-tiny"'+
+                'data-filtering="true" data-paging="true" data-sorting="true">' +
+                    '<thead> ' +
+                    '<tr> ' +
+                    '<td> ' +
+                    '<b style="font-weight: bold;">ordre</b>'+
+                    '</td>' +
+                    '<td> ' +
+                    '<b style="font-weight: bold;">obligatoire</b>'+
+                    '</td>' +
+                    '<td> ' +
+                    '<b style="font-weight: bold;">Actif</b>'+
+                    '</td>' +
+                    '<td> ' +
+                    '<b style="font-weight: bold;">CreatedAt</b>'+
+                    '</td>' +
+                    '<td> ' +
+                    '<b style="font-weight: bold;">UpdatedAt</b>'+
+                    '</td>' +
+                    '<td> ' +
+                    '<button type="button"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter champ'+
+                    '</button>'+
+                    '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">'+
+                        '<div class="modal-dialog" role="document">'+
+                           '<div class="modal-content">'+
+                               ' <div class="modal-header">'+
+                                    '<h4 class="modal-title" id="exampleModalLabel1">Champs option</h4>'+
+                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                                '</div>'+
+                                '<div class="modal-body">'+
+                                    '<div class="row">'+
+                                        '<div class="col-12">'+
+                                           ' <div class="card">'+
+                                                '<div class="row">'+
+                                                   ' <div class="col-lg-12">'+
+                                                       ' <div class="card">'+
+                                                           ' <div class="card-body">'+
+                                                               ' <div class="form-body">'+
+                                                                   ' <div class="row p-t-20">'+
+                                                                      '  <div class="col-md-12">'+
+                                                                         '   <div class="form-group">'+
+                                                                          ' <label>order</label>'+
+                                                                          '<input type="text" class="form-control" value="titre">'+
+                                                                         '   </div>'+
+                                                                        '</div>'+
+                                                                        '<div class="col-md-12">'+
+                                                                            '<div class="form-group">'+
+                                                                         ' <label>obligatoire</label>'+
+                    '<div><label class="required">Obligatoire</label><div id="form_champs_obligatoire"><input type="radio" id="form_champs_obligatoire_0" name="form_champs[obligatoire]" required="required" value="1" checked="checked"><label for="form_champs_obligatoire_0" class="required">Oui</label><input type="radio" id="form_champs_obligatoire_1" name="form_champs[obligatoire]" required="required" value="0"><label for="form_champs_obligatoire_1" class="required">Non</label></div></div>'+
+                                                                           ' </div>'+
+                                                                       ' </div>'+
+                                                                   ' </div>'+
+                                                                    '<div class="row">'+
+                                                                     '   <div class="col-12">'+
+                                                                      '      <div class="form-group">'+
+                        '<div><label class="required">Actif</label><div id="form_champs_actif"><input type="radio" id="form_champs_actif_0" name="form_champs[actif]" required="required" value="1" checked="checked"><label for="form_champs_actif_0" class="required">Oui</label><input type="radio" id="form_champs_actif_1" name="form_champs[actif]" required="required" value="0"><label for="form_champs_actif_1" class="required">Non</label></div></div>'+
+                                                                       '     </div>'+
+                                                                      '  </div>'+
+                                                                   ' </div>'+
+                                                                    '<div class="col-md-6">'+
+                                                                     '   <div class="form-group">'+
+                                                                       '<input type="text" class="form-control">'+
+                                                                      '  </div>'+
+                                                                    '</div>'+
+
+                                                               ' </div>'+
+                                                               ' <div class="form-actions">'+
+                                                                    '<button type="submit" class="btn btn-success" onclick="addChamps()">'+
+                                                                     '   <i class="fa fa-check"></i>'+
+                                                                      '  Save'+
+                                                                    '</button>'+
+                                                                   ' <a href="" type="button" class="btn btn-inverse">Cancel</a>'+
+                                                 '                     </div>'+
+                                                                    '</div>'+
+                                         '               </div>'+
+                                        '            </div>'+
+                                       '         </div>'+
+                                      '      </div>'+
+                                     '   </div>'+
+                                    '</div>'+
+                            '        <div class="modal-footer">'+
+                           '             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+
+                '                    <a href="" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>'+
+
+                         '           </div>'+
+                        '        </div>'+
+                       '     </div>'+
+                      '  </div>'+
+                   ' </div>'+
+                    '</td>' +
+                    '</tr>' +
+                    '</thead> ' +
+                    '<tbody> ' +
+                    this.tab
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>';
+            }
+        });
+
+        function addChamps() {
+            console.log('ccccccccc');
+            $.ajax({
+                url: '/form/champs/new', // URL of the server-side script
+                type: "POST", // Type of request (GET, POST, etc.)
+                data: {label: 'dddd' , question: 'aaaaaaaaa' , description: 'rrrrrrr', actif: true}, // Type of data expected from the server
+                success: function(data) {
+                    // Update the result div with the response
+                    $("#result").html(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle errors
+                    console.error("AJAX Error: " + textStatus, errorThrown);
+                }
+            });
+        }
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormChampsOption index{% endblock %}
+
+{% block content %}
+
+
+
+
+
+    <div class="accordion" id="accordionTable">
+        <div class="card m-b-5">
+            <div aria-labelledby="heading1">
+                <div class="card-body">
+                    <a href="{{ path('app_form_champs_option_new') }}" type="button" class="btn btn-info btn-rounded m-t-10 float-right text-white">Ajouter Champs option</a>
+                    <div class="table-responsive">
+                        <table id="demo-foo-accordion" class="table table-bordered m-b-0 toggle-arrow-tiny"
+                               data-filtering="true" data-paging="true" data-sorting="true">
+                            <thead>
+                            <tr class="footable-filtering">
+                                <th> ID </th>
+                                <th> label </th>
+                                <th> Titre </th>
+                                <th> Description Debut</th>
+                                <th> Description Fin </th>
+                                <th> biblio </th>
+                                <th> Projet </th>
+                                <th> Actions </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form_champs_option in form_champs_options %}
+                            <tr>
+                                <td>{{ form_champs_option.id }}</td>
+                                <td>{{ form_champs_option.option }}</td>
+                                <td>{{ form_champs_option.valeur }}</td>
+                                <td>{{ form_champs_option.ordre }}</td>
+                                <td>{{ form_champs_option.actif ? 'Yes' : 'No' }}</td>
+                                <td>{{ form_champs_option.createdAt ? form_champs_option.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ form_champs_option.updatedAt ? form_champs_option.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('app_form_champs_option_edit', {'id': form_champs_option.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                                    <a data-toggle="modal" data-target="#elementModal"><i class="far fa-trash-alt " style="color: red"></i></a>
+
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="elementModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel1">Champs option</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    Voulez vous supprimer cette Champs option
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <a href="{{ path('app_form_champs_option_delete', {'id': form_champs_option.id}) }}" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="8">no records found</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

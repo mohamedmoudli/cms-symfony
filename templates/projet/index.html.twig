@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet index{% endblock %}
+
+{% block content %}
+    <style>
+        .card-cms {
+            padding: 1.5rem !important;
+            box-shadow: var(--bs-box-shadow);
+            border: hidden;
+            height: 100%;
+            background: var(--bs-card-bg);
+        }
+        .card {
+            word-wrap: break-word;
+            background-clip: border-box;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            position: relative;
+        }
+    </style>
+    <div class="accordion" id="accordionTable">
+                <div>
+                    <a href="{{ path('app_projet_new') }}" type="button" class="btn btn-info btn-rounded  float-right text-white">Ajouter Projet</a>
+                </div>
+    </div>
+    <div class="row">
+        {% for projet in projets %}
+        <a class="col-ms-12 col-md-6 col-lg-3" href="">
+            <div class="card card-cms
+		">
+                <div class="row">
+                    <div class="col">
+														<span class="project__end-date">
+							<i class="ri-calendar-event-line"></i> {{ projet.createdAt|date('d/m/Y') }}
+						</span>
+                    </div>
+
+
+                </div>
+                <div class="row project__row-1">
+                    <div class="col-auto">
+                        <img src="https://serveur-images.devil-it-applications.fr/dsm/logo/favicon/light/favicon.ico" class="project__logo-img">
+                    </div>
+
+                    <div class="col">
+                        <h5 class="card-title">{{ projet.label }}</h5>
+                        <div class="project__url-server text-light-emphasis">
+                            <i class="ri-close-circle-line"></i> Hors ligne
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </a>
+       {% endfor %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,150 @@
+
+<div class="modal fade" id="stepModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Champs option</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {# {{ form_start(form) }}
+                                                                <div class="form-body">
+                                                                    <div class="row p-t-20">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                {{ form_label(form.projet, 'Projet', {'label_attr': {'class': 'control-label'}}) }}
+                                                                                {{ form_widget(form.projet, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                                                                }}
+                                                                                {{ form_errors(form.projet) }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                {{ form_label(form.form, 'Formulaire', {'label_attr': {'class': 'control-label'}}) }}
+                                                                                {{ form_widget(form.form, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                                                                }}
+                                                                                {{ form_errors(form.form) }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                {{ form_label(form.label, 'label', {'label_attr': {'class': 'control-label'}}) }}
+                                                                                {{ form_widget(form.label, {'attr': {'class': 'form-control custom-select'}}) }}
+                                                                                {{ form_errors(form.label) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                {{ form_label(form.code_html, 'code html', {'label_attr': {'class':
+                                                                                    'control-label'}}) }}
+                                                                                {{ form_widget(form.code_html, {'attr': {'class': 'textarea_editor form-control', 'placeholder':
+                                                                                    'Description Debut'}}) }}
+                                                                                {{ form_errors(form.code_html) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                {{ form_label(form.code_css, 'code css', {'label_attr': {'class':
+                                                                                    'control-label'}}) }}
+                                                                                {{ form_widget(form.code_css, {'attr': {'class': 'textarea_editor2 form-control', 'placeholder':
+                                                                                    'Description Fin'}}) }}
+                                                                                {{ form_errors(form.code_css) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <button type="submit" class="btn btn-success">
+                                                                        <i class="fa fa-check"></i>
+                                                                        Save
+                                                                    </button>
+                                                                    <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                                                                </div>
+                                                                {{ form_end(form) }}#}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {#                                        <a href="{{ path('app_form_etat_delete', {'id': form_etat.id}) }}" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
+
+    <script src="{{ asset('assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/html5-editor/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('assets/plugins/html5-editor/bootstrap-wysihtml5.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.textarea_editor').wysihtml5();
+            $('.textarea_editor2').wysihtml5();
+
+
+        });
+    </script>
+
+{% endblock %}

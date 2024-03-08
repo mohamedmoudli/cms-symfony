@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable DataTable</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+</head>
+<body>
+
+<table id="myTable" class="display">
+    <thead>
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="details-control"></td>
+        <td>1</td>
+        <td>Item 1</td>
+        <td>Additional details for Item 1</td>
+    </tr>
+    <tr>
+        <td class="details-control"></td>
+        <td>2</td>
+        <td>Item 2</td>
+        <td>Additional details for Item 2</td>
+    </tr>
+    <!-- Add more rows as needed -->
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#myTable').DataTable({
+            columnDefs: [{
+                className: 'control',
+                orderable: false,
+                targets: 0
+            }],
+            order: [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        $('#myTable tbody').on('click', 'td.details-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+        // Format details
+        function format(data) {
+            return '<div>Details: ' + data[3] + '</div>';
+        }
+    });
+</script>
+
+</body>
+</html>

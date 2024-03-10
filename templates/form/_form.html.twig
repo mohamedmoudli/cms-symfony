@@ -67,6 +67,7 @@
                     </button>
                     <a href="" type="button" class="btn btn-inverse">Cancel</a>
                 </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -143,7 +144,6 @@
                                                                 <a href="" type="button" class="btn btn-inverse">Cancel</a>
                                                             </div>
                                                             {{ form_end(formStep) }}
-                                                            {{ form_end(form) }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,6 +166,7 @@
                            data-filtering="true" data-paging="true" data-sorting="true">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>Id</th>
                             <th>titre</th>
                             <th>ordre</th>
@@ -178,6 +179,7 @@
                         </thead>
                         <tbody>
                         <tr>
+                            <th></th>
                             <th>Id</th>
                             <th>titre</th>
                             <th>ordre</th>
@@ -191,6 +193,7 @@
 
                             <tr>
                                 <td class="details-control"><i class="fa fa-plus" aria-hidden="true"></i></td>
+                                <td>{{ form_etat.id }}</td>
                                 <td>{{ form_etat.titre }}</td>
                                 <td>{{ form_etat.ordre }}</td>
                                 <td>{{ form_etat.save }}</td>
@@ -256,6 +259,88 @@
             </div>
             <div class="modal-body">
                 <p>sssssssssssssssssssssss</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="formStepChamps" style="display: none">
+    <tbody>
+
+{% for stepChamps in formStepChamps %}
+    <tr> <td>{{ stepChamps.ordre }} </td> <td> {{ stepChamps.obligatoire }} </td> <td>{{ stepChamps.actif }} </td> <td>{{ stepChamps.formStep.id }} </td> <td>06-03-2024 </td> <td>06-03-2024 </td> <td> <a href=""><i class="fas fa-pencil-alt"></i></a><a data-toggle="modal" data-target="#elementModal"><i class="far fa-trash-alt " style="color: red"></i></a> </td></tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+<div class="modal fade" id="exampleModalStepChamps" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-body">
+                                    <div class="row p-t-20">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_label(formChamps.formChamps, 'form Champs', {'label_attr': {'class': 'control-label'}}) }}
+                                                {{ form_widget(formChamps.formChamps, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                                }}
+                                                {{ form_errors(formChamps.formChamps) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_label(formChamps.ordre, 'ordre', {'label_attr': {'class': 'control-label'}}) }}
+                                                {{ form_widget(formChamps.ordre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
+                                                }}
+                                                {{ form_errors(formChamps.ordre) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_row(formChamps.actif) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                {{ form_row(formChamps.obligatoire) }}
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-success" onclick="addChamps()">
+                                        <i class="fa fa-check"></i>
+                                        Save
+                                    </button>
+                                    <a href="" type="button" class="btn btn-inverse">Cancel</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

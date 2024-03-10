@@ -18,6 +18,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/form')]
 class FormController extends AbstractController
@@ -31,63 +36,69 @@ class FormController extends AbstractController
     }
 
     #[Route('/new', name: 'app_form_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(FormStepChampsRepository $formStepChampsRepository ,Request $request, EntityManagerInterface $entityManager): Response
     {
         $forme = new Form();
         $formeStep = new FormStep();
         $formeStepChamps = new FormStepChamps();
         $form = $this->createForm(FormType::class, $forme);
         $formStep = $this->createForm(FormStepType::class, $formeStep);
-        $formStepChamps = $this->createForm(FormStepChampsType::class, $formeStepChamps);
         $form->handleRequest($request);
         $formStep->handleRequest($request);
-        $formStepChamps->handleRequest($request);
+        if ($request->getMethod() == 'GET') {
+            $formStepChampsType = $this->createForm(FormStepChampsType::class, $formeStepChamps);
+            $formStepChampsType->handleRequest($request);
+        }
         if ($request->getMethod() == 'POST') {
             $entityManager->persist($forme);
-            $formeStep->setForm($forme);
-            $formeStepChamps->setFormStep($formeStep);
-            $entityManager->persist($forme);
-            $entityManager->persist($formeStep);
-            $entityManager->persist($formeStepChamps);
+           // $formeStep->setForm($forme);
+          //  $formeStepChamps->setFormStep($formeStep);
+        //    $entityManager->persist($forme);
+          //  $entityManager->persist($formeStep);
+           // $entityManager->persist($formeStepChamps);
             $entityManager->flush();
-            return $this->redirectToRoute('app_form_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId()], Response::HTTP_SEE_OTHER);
         }
         $formeStepChamps = $entityManager->getRepository(FormStepChamps::class)->findBy(['formStep'=>$formeStep->getId()]);
         return $this->renderForm('form/new.html.twig', [
             'formStep'=>$formStep,
             'formSteps'=>$forme->getFormSteps(),
-            'formStepChamps'=>$formStepChamps,
-            'formeStepChamps'=>$formeStepChamps,
+            'formStepChamps'=>$formStepChampsRepository->findAll(),
+            'formChamps'=>$formStepChampsType,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_form_edit', methods: ['GET', 'POST'])]
-    public function edit(FormStepChampsRepository $formStepChampsRepository , Request $request, Form $forme, EntityManagerInterface $entityManager): Response
+    public function edit( FormStepChampsRepository $formStepChampsRepository , Request $request, Form $forme, EntityManagerInterface $entityManager): Response
     {
 
         $formeStep = new FormStep();
         $formeStepChamps = new FormStepChamps();
         $form = $this->createForm(FormType::class, $forme);
         $formStep = $this->createForm(FormStepType::class, $formeStep);
-        $formStepChamps = $this->createForm(FormStepChampsType::class, $formeStepChamps);
+
         $form->handleRequest($request);
         $formStep->handleRequest($request);
+        if ($request->getMethod() == 'GET') {
+            $formStepChampsType = $this->createForm(FormStepChampsType::class, $formeStepChamps);
+            $formStepChampsType->handleRequest($request);
+        }
         if ($request->getMethod() == 'POST') {
 
             $formeStep->setForm($forme);
             $formeStepChamps->setFormStep($formeStep);
             $entityManager->persist($formeStep);
-            $entityManager->persist($formeStepChamps);
+            //$entityManager->persist($formeStepChamps);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_form_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId()], Response::HTTP_SEE_OTHER);
         }
-      //  die('ddddddddd');
         return $this->renderForm('form/edit.html.twig', [
             'formStep'=>$formStep,
             'formSteps'=>$forme->getFormSteps(),
             'formStepChamps'=>$formStepChampsRepository->findAll(),
+            'formChamps'=>$formStepChampsType,
             'form' => $form,
             'form' => $form,
         ]);

@@ -26,7 +26,6 @@ class FormStepChampsController extends AbstractController
     #[Route('/new', name: 'app_form_step_champs_new', methods: ['GET', 'POST'])]
     public function new(FormStepRepository $formStepRepository ,FormChampsRepository $formChampsRepository , Request $request, EntityManagerInterface $entityManager): Response
     {
-
         $formStepChamp = new FormStepChamps();
         $formStep = $formStepRepository->findOneBy(['id'=>$request->get('step')]);
         $formChamps = $formChampsRepository->findOneBy(['id'=>$request->get('champs')]);

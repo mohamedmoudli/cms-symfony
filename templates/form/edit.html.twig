@@ -157,11 +157,10 @@
         });
 
         function addChamps() {
-            console.log(this.data);
             $.ajax({
                 url: '/form/step/champs/new', // URL of the server-side script
                 type: "POST", // Type of request (GET, POST, etc.)
-                data: {order: $('#form_step_champs_ordre').val() , champs: $('#form_step_champs_formChamps').value , obligatoire: document.querySelector('input[name="form_step_champs[obligatoire]"]:checked').value , actif: document.querySelector('input[name="form_step_champs[actif]"]:checked').value ,  step:this.data[1]}, // Type of data expected from the server
+                data: {order: $('#form_step_champs_ordre').val() , champs: $('#form_step_champs_formChamps').val() , obligatoire: document.querySelector('input[name="form_step_champs[obligatoire]"]:checked').value , actif: document.querySelector('input[name="form_step_champs[actif]"]:checked').value ,  step:this.data[1]}, // Type of data expected from the server
                 success: function(data) {
                     // Update the result div with the response
                     $("#result").html(data);

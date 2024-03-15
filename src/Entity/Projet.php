@@ -33,12 +33,16 @@ class Projet
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: FormEtat::class)]
     private Collection $formEtats;
 
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: MonetiqueDroit::class)]
+    private Collection $monetiqueDroits;
+
     public function __construct()
     {
         $this->forms = new ArrayCollection();
         $this->formTotauxes = new ArrayCollection();
         $this->formChamps = new ArrayCollection();
         $this->formEtats = new ArrayCollection();
+        $this->monetiqueDroits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,5 +183,35 @@ class Projet
     }
     public function __toString(){
         return $this->label;
+    }
+
+    /**
+     * @return Collection<int, MonetiqueDroit>
+     */
+    public function getMonetiqueDroits(): Collection
+    {
+        return $this->monetiqueDroits;
+    }
+
+    public function addMonetiqueDroit(MonetiqueDroit $monetiqueDroit): static
+    {
+        if (!$this->monetiqueDroits->contains($monetiqueDroit)) {
+            $this->monetiqueDroits->add($monetiqueDroit);
+            $monetiqueDroit->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMonetiqueDroit(MonetiqueDroit $monetiqueDroit): static
+    {
+        if ($this->monetiqueDroits->removeElement($monetiqueDroit)) {
+            // set the owning side to null (unless already changed)
+            if ($monetiqueDroit->getProjet() === $this) {
+                $monetiqueDroit->setProjet(null);
+            }
+        }
+
+        return $this;
     }
 }

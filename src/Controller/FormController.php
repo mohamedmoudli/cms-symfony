@@ -8,9 +8,12 @@ use App\Entity\FormEtat;
 use App\Entity\FormEtatVariable;
 use App\Entity\FormStep;
 use App\Entity\FormStepChamps;
+use App\Entity\Monetique;
+use App\Entity\Projet;
 use App\Form\FormStepChampsType;
 use App\Form\FormStepType;
 use App\Form\FormType;
+use App\Form\MonetiqueType;
 use App\Repository\FormRepository;
 use App\Repository\FormStepChampsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,41 +41,38 @@ class FormController extends AbstractController
     #[Route('/new', name: 'app_form_new', methods: ['GET', 'POST'])]
     public function new(FormStepChampsRepository $formStepChampsRepository ,Request $request, EntityManagerInterface $entityManager): Response
     {
+        $monetique = new Monetique();
+        $formMonetique = $this->createForm(MonetiqueType::class, $monetique);
+        $formMonetique->handleRequest($request);
         $forme = new Form();
-        $formeStep = new FormStep();
-        $formeStepChamps = new FormStepChamps();
         $form = $this->createForm(FormType::class, $forme);
-        $formStep = $this->createForm(FormStepType::class, $formeStep);
         $form->handleRequest($request);
-        $formStep->handleRequest($request);
-        if ($request->getMethod() == 'GET') {
-            $formStepChampsType = $this->createForm(FormStepChampsType::class, $formeStepChamps);
-            $formStepChampsType->handleRequest($request);
-        }
+
         if ($request->getMethod() == 'POST') {
+            $session = $request->getSession();
+            $projet = $entityManager->getRepository(Projet::class)->findOneBy(['id'=>$session->get('projetId')]);
+            $forme->setProjet($projet);
             $entityManager->persist($forme);
-           // $formeStep->setForm($forme);
-          //  $formeStepChamps->setFormStep($formeStep);
-        //    $entityManager->persist($forme);
-          //  $entityManager->persist($formeStep);
-           // $entityManager->persist($formeStepChamps);
+            $entityManager->persist($monetique);
             $entityManager->flush();
-            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId() , 'idMonetique'=>$monetique->getId()], Response::HTTP_SEE_OTHER);
         }
-        $formeStepChamps = $entityManager->getRepository(FormStepChamps::class)->findBy(['formStep'=>$formeStep->getId()]);
         return $this->renderForm('form/new.html.twig', [
-            'formStep'=>$formStep,
-            'formSteps'=>$forme->getFormSteps(),
-            'formStepChamps'=>$formStepChampsRepository->findAll(),
-            'formChamps'=>$formStepChampsType,
+            'formMonetique'=>$formMonetique,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_form_edit', methods: ['GET', 'POST'])]
-    public function edit( FormStepChampsRepository $formStepChampsRepository , Request $request, Form $forme, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{idMonetique}', name: 'app_form_edit', methods: ['GET', 'POST'])]
+    public function edit( FormStepChampsRepository $formStepChampsRepository ,$idMonetique = null , Request $request, Form $forme, EntityManagerInterface $entityManager): Response
     {
-
+        if ($idMonetique){
+            $monetique = $entityManager->getRepository(Monetique::class)->findOneBy(['id'=>$idMonetique]);
+        }else{
+            $monetique = new Monetique();
+        }
+        $formMonetique = $this->createForm(MonetiqueType::class, $monetique);
+        $formMonetique->handleRequest($request);
         $formeStep = new FormStep();
         $formeStepChamps = new FormStepChamps();
         $form = $this->createForm(FormType::class, $forme);
@@ -85,22 +85,26 @@ class FormController extends AbstractController
             $formStepChampsType->handleRequest($request);
         }
         if ($request->getMethod() == 'POST') {
-
             $formeStep->setForm($forme);
             $formeStepChamps->setFormStep($formeStep);
-            $entityManager->persist($formeStep);
+            if ($formeStep->getTitre()){
+                $entityManager->persist($formeStep);
+            }
             //$entityManager->persist($formeStepChamps);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_form_edit', ['id'=>$forme->getId() , 'idMonetique'=>$monetique->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('form/edit.html.twig', [
             'formStep'=>$formStep,
             'formSteps'=>$forme->getFormSteps(),
             'formStepChamps'=>$formStepChampsRepository->findAll(),
             'formChamps'=>$formStepChampsType,
+            'formMonetique'=>$formMonetique,
             'form' => $form,
             'form' => $form,
+            'id' => $forme->getId(),
+            'idMonetique' => $monetique->getId(),
         ]);
     }
 

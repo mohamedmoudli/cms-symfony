@@ -21,6 +21,9 @@ class MonetiqueVariable
     #[ORM\OneToMany(mappedBy: 'monetiqueVariable', targetEntity: MonetiqueDroitVariable::class)]
     private Collection $monetiqueDroitVariables;
 
+    #[ORM\Column(length: 255)]
+    private ?string $label = null;
+
     public function __construct()
     {
         $this->monetiqueDroitVariables = new ArrayCollection();
@@ -71,5 +74,19 @@ class MonetiqueVariable
         }
 
         return $this;
+    }
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->label;
     }
 }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MonetiqueVariable{% endblock %}
+
+{% block content %}
+    <h1>Create new MonetiqueVariable</h1>
+
+    {{ include('monetique_variable/_form.html.twig') }}
+
+    <a href="{{ path('app_monetique_variable_index') }}">back to list</a>
+{% endblock %}

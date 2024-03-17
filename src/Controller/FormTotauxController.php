@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FormTotaux;
+use App\Entity\Projet;
 use App\Form\FormTotauxType;
 use App\Repository\FormTotauxRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,9 @@ class FormTotauxController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $session = $request->getSession();
+            $projet = $entityManager->getRepository(Projet::class)->findOneBy(['id'=>$session->get('projetId')]);
+            $formTotaux->setProjet($projet);
             $entityManager->persist($formTotaux);
             $entityManager->flush();
 

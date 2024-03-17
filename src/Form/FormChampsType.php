@@ -25,7 +25,6 @@ class FormChampsType extends AbstractType
                 ],
                 'expanded' => true,
             ])
-            ->add('projet')
             ->add('formToTaux')
         ;
     }

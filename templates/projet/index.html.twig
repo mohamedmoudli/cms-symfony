@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         {% for projet in projets %}
-        <a class="col-ms-12 col-md-6 col-lg-3" href="">
+        <a class="col-ms-12 col-md-6 col-lg-3" href="{{ path('app_projet_select', {'id': projet.id}) }}">
             <div class="card card-cms
 		">
                 <div class="row">

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MonetiqueVariable{% endblock %}
+
+{% block content %}
+    <h1>Edit MonetiqueVariable</h1>
+
+    {{ include('monetique_variable/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_monetique_variable_index') }}">back to list</a>
+
+    {{ include('monetique_variable/_delete_form.html.twig') }}
+{% endblock %}

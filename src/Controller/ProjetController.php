@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FormEtat;
 use App\Entity\Projet;
 use App\Form\ProjetType;
 use App\Repository\ProjetRepository;
@@ -42,12 +43,14 @@ class ProjetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_projet_show', methods: ['GET'])]
-    public function show(Projet $projet): Response
+    #[Route('/{id}', name: 'app_projet_select', methods: ['GET'])]
+    public function select(Request $request , string $id, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('projet/show.html.twig', [
-            'projet' => $projet,
-        ]);
+        $projet = $entityManager->getRepository(Projet::class)->findOneBy(['id'=>$id]);
+        $session = $request->getSession();
+        $session->set('projetId', $id);
+        $session->set('projetName', $projet->getLabel());
+        return $this->redirectToRoute('app_projet_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/edit', name: 'app_projet_edit', methods: ['GET', 'POST'])]

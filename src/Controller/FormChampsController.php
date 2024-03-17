@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\FormChamps;
 use App\Entity\FormChampsOption;
 use App\Entity\FormStepChamps;
+use App\Entity\Projet;
 use App\Form\FormChampsType;
 use App\Repository\FormChampsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,6 +33,9 @@ class FormChampsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $session = $request->getSession();
+            $projet = $entityManager->getRepository(Projet::class)->findOneBy(['id'=>$session->get('projetId')]);
+            $formChamp->setProjet($projet);
             $entityManager->persist($formChamp);
             $entityManager->flush();
 

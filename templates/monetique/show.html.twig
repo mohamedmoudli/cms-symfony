@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Monetique{% endblock %}
+
+{% block body %}
+    <h1>Monetique</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ monetique.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ monetique.label }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ monetique.code }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_monetique_index') }}">back to list</a>
+
+    <a href="{{ path('app_monetique_edit', {'id': monetique.id}) }}">edit</a>
+
+    {{ include('monetique/_delete_form.html.twig') }}
+{% endblock %}

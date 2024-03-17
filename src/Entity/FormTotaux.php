@@ -31,6 +31,9 @@ class FormTotaux
     #[ORM\OneToMany(mappedBy: 'formToTaux', targetEntity: FormChamps::class)]
     private Collection $formChamps;
 
+    #[ORM\ManyToOne(inversedBy: 'formTotauxes')]
+    private ?MonetiqueType $monetiqueType = null;
+
     public function __construct()
     {
         $this->formChamps = new ArrayCollection();
@@ -108,5 +111,17 @@ class FormTotaux
     }
     public function __toString(){
         return $this->label;
+    }
+
+    public function getMonetiqueType(): ?MonetiqueType
+    {
+        return $this->monetiqueType;
+    }
+
+    public function setMonetiqueType(?MonetiqueType $monetiqueType): static
+    {
+        $this->monetiqueType = $monetiqueType;
+
+        return $this;
     }
 }

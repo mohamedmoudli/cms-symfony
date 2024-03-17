@@ -17,7 +17,6 @@ class FormType extends AbstractType
             ->add('descriptionDebut')
             ->add('descriptionFin')
             ->add('biblio')
-            ->add('projet')
         ;
     }
 

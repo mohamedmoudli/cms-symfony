@@ -186,16 +186,16 @@
                                 </ul>
                             </li>
                             {# <li><a class="waves-effect waves-dark" href="{{ path('app_image_index') }}"><i class="mdi mdi-image-filter"></i><span class="hide-menu">Fichiers</span></a></li> #}
-
-                            <li><a class="waves-effect waves-dark" href=" {{ path('app_projet_index') }}"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">Projet</span></a></li>
-                            <li><a class="waves-effect waves-dark" href=""><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Page</span></a></li>
-                            <li> <a class="waves-effect waves-dark" href="#" aria-expanded="true"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Article</span></a>
+                            {% set projet = app.session.get('projetName') %}
+                            <li><a class="waves-effect waves-dark" href=" {{ path('app_projet_index') }}"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">{{ projet }}</span></a></li>
+                          {#  <li><a class="waves-effect waves-dark" href=""><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Page</span></a></li>#}
+                            {#<li> <a class="waves-effect waves-dark" href="#" aria-expanded="true"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Article</span></a>
                                 <ul aria-expanded="true" class="in">
                                     <li><a class="waves-effect waves-dark" href="">- Savoir faire</a></li>
                                     <li><a class="waves-effect waves-dark" href="">- Formalité</a></li>
                                     <li><a class="waves-effect waves-dark" href="">- Nos realisations</a></li>
                                 </ul>
-                            </li>
+                            </li>#}
                             <li> <a class="waves-effect waves-dark" href="#" aria-expanded="true"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Formulaires</span></a>
                                 <ul aria-expanded="true" class="in">
                                     <li><a class="waves-effect waves-dark" href="{{ path('app_form_index') }}">- Formulaires</a></li>
@@ -203,9 +203,17 @@
                                     <li><a class="waves-effect waves-dark" href="{{ path('app_form_champs_option_index') }}">- Champs Option</a></li>
                                     <li><a class="waves-effect waves-dark" href="{{ path('app_form_etat_index') }}">- Etat</a></li>
                                     <li><a class="waves-effect waves-dark" href="{{ path('app_form_etat_variable_index') }}">- Etat Variable</a></li>
-                                    <li><a class="waves-effect waves-dark" href="{{ path('app_form_step_index') }}">- Step</a></li>
-                                    <li><a class="waves-effect waves-dark" href="{{ path('app_form_step_champs_index') }}">- Step Champs</a></li>
+                                    {#<li><a class="waves-effect waves-dark" href="{{ path('app_form_step_index') }}">- Step</a></li>
+                                    <li><a class="waves-effect waves-dark" href="{{ path('app_form_step_champs_index') }}">- Step Champs</a></li>#}
                                     <li><a class="waves-effect waves-dark" href="{{ path('app_form_totaux_index') }}">- Totaux</a></li>
+                                </ul>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="#" aria-expanded="true"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Monetique</span></a>
+                                <ul aria-expanded="true" class="in">
+                                    <li><a class="waves-effect waves-dark" href="{{ path('app_monetique_type_index') }}">- Type</a></li>
+                                    <li><a class="waves-effect waves-dark" href="{{ path('app_monetique_variable_index') }}">- Variable</a></li>
+                                    <li><a class="waves-effect waves-dark" href="{{ path('app_monetique_droit_variable_index') }}">- droit variable</a></li>
+                                    <li><a class="waves-effect waves-dark" href="{{ path('app_monetique_droit_index') }}">- droit</a></li>
                                 </ul>
                             </li>
                             {% if is_granted('ROLE_ADMIN') %}

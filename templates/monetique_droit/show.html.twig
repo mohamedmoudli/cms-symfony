@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MonetiqueDroit{% endblock %}
+
+{% block body %}
+    <h1>MonetiqueDroit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ monetique_droit.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_monetique_droit_index') }}">back to list</a>
+
+    <a href="{{ path('app_monetique_droit_edit', {'id': monetique_droit.id}) }}">edit</a>
+
+    {{ include('monetique_droit/_delete_form.html.twig') }}
+{% endblock %}

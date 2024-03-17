@@ -14,7 +14,7 @@ class FormTotauxType extends AbstractType
         $builder
             ->add('label')
             ->add('unite')
-            ->add('projet')
+            ->add('monetiqueType')
         ;
     }
 

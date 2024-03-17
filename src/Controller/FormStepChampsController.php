@@ -20,6 +20,7 @@ class FormStepChampsController extends AbstractController
     #[Route('/{idStep}', name: 'app_form_step_champs_index', methods: ['GET'])]
     public function index(FormStepChampsRepository $formStepChampsRepository , ?string $idStep=null): Response
     {
+      //  var_dump($formStepChampsRepository->findBy(['formStep'=>$idStep]));
         return $this->json($formStepChampsRepository->findBy(['formStep'=>$idStep]));
     }
 

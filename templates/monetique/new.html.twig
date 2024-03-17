@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Monetique{% endblock %}
+
+{% block body %}
+    <h1>Create new Monetique</h1>
+
+    {{ include('monetique/_form.html.twig') }}
+
+    <a href="{{ path('app_monetique_index') }}">back to list</a>
+{% endblock %}

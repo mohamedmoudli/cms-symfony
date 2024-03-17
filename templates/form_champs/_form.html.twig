@@ -7,14 +7,6 @@
                     <div class="row p-t-20">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_label(form.projet, 'Projet', {'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_widget(form.projet, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}})
-                                }}
-                                {{ form_errors(form.projet) }}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 {{ form_label(form.label, 'label', {'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_widget(form.label, {'attr': {'class': 'form-control custom-select'}}) }}
                                 {{ form_errors(form.label) }}

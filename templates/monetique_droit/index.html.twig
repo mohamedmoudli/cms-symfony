@@ -1,0 +1,78 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}FormChamps index{% endblock %}
+
+{% block content %}
+    <div class="accordion" id="accordionTable">
+        <div class="card m-b-5">
+            <div aria-labelledby="heading1">
+                <div class="card-body">
+                    <a href="{{ path('app_monetique_droit_new') }}" type="button" class="btn btn-info btn-rounded m-t-10 float-right text-white">Ajouter droite</a>
+                    <div class="table-responsive">
+                        <table id="demo-foo-accordion" class="table table-bordered m-b-0 toggle-arrow-tiny"
+                               data-filtering="true" data-paging="true" data-sorting="true">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>label</th>
+                                <th>monetique</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for monetique_droit in monetique_droits %}
+                            <tr>
+                                <td>{{ monetique_droit.id }}</td>
+                                <td>{{ monetique_droit.label }}</td>
+                                <td>{{ monetique_droit.monetique.label }}</td>
+                                <td>
+                                    <a href="{{ path('app_monetique_droit_edit', {'id': monetique_droit.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                                    <a data-toggle="modal" data-target="#elementModal"><i class="far fa-trash-alt " style="color: red"></i></a>
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="elementModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel1">Champs</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    Voulez vous supprimer cette Champs
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <a href="{{ path('app_monetique_droit_delete', {'id': monetique_droit.id}) }}" type="button" class="btn btn-red" id="elementActionButton">Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="9">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </div>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

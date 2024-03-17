@@ -22,8 +22,9 @@ class FormStepChampsNormaliserNormalizer implements NormalizerInterface, Cacheab
                  'obligatoire'=>$object->isObligatoire(),
                  'actif'=>$object->isActif(),
                  'formStep'=>$object->getFormStep()->getTitre(),
-                 'createdAt'=>$object->getCreatedAt(),
-                 'updatedAt'=>$object->getUpdatedAt()
+                 'formChamps'=>$object->getFormChamps()->getLabel(),
+                 'createdAt'=>$object->getCreatedAt()->format('d/m/Y'),
+                 'updatedAt'=>$object->getUpdatedAt()->format('d/m/Y')
              ];
              return $data;
          }
